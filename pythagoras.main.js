@@ -8,7 +8,7 @@ pythagoras.main = function() {
 		var ctx = canvas.getContext("2d");
 		var width = 130;
 		var angle = rad(45);
-		var fillColor = "999944";
+		var fillColor = "EEEE44";
 		var strokeColor = "11DD11";
 		ctx.translate(400, 400);
 		recurse(ctx, width, 14, angle, fillColor, strokeColor);
@@ -32,12 +32,12 @@ pythagoras.main = function() {
 		ctx.rotate(angle);
 		var val = width*0.5*Math.sqrt(2);
 		ctx.translate(-val, -val);
-		recurse(ctx, val, depth-1, angle, colorLum(fillColor, -0.01), colorLum(strokeColor, -0.03));
+		recurse(ctx, val, depth-1, angle, colorLum(fillColor, -0.01), colorLum(strokeColor, -0.04));
 		ctx.restore();
 		ctx.save();
 		ctx.rotate(-angle);
 		ctx.translate(0, -val);
-		recurse(ctx, val, depth-1, angle, colorLum(fillColor, -0.01), colorLum(strokeColor, -0.03));
+		recurse(ctx, val, depth-1, angle, colorLum(fillColor, -0.01), colorLum(strokeColor, -0.04));
 		ctx.restore();
 		
 				
