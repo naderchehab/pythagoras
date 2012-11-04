@@ -1,19 +1,33 @@
 "use strict";
+
+ // shim layer with setTimeout fallback
+    window.requestAnimFrame = (function(){
+      return  window.requestAnimationFrame       || 
+              window.webkitRequestAnimationFrame || 
+              window.mozRequestAnimationFrame    || 
+              window.oRequestAnimationFrame      || 
+              window.msRequestAnimationFrame     || 
+              function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+
 var pythagoras = {};
+var ctx, width, angle, fillColor, strokeColor;
+
 pythagoras.main = function() {
 
 	var run = function() {
 
 		var canvas = document.getElementById("pythagoras-canvas");
-		var ctx = canvas.getContext("2d");
-		var width = 130;
-		var angle = rad(45);
-		var fillColor = "EEEE44";
-		var strokeColor = "11DD11";
+		ctx = canvas.getContext("2d");
+		width = 130;
+		angle = rad(45);
+		fillColor = "504106";
+		strokeColor = "00AF64";
 		ctx.translate(400, 400);
-		recurse(ctx, width, 14, angle, fillColor, strokeColor);
-		//test(ctx, width, 0 ,0);
-
+		animate();
+		
 	}
 	
 	var recurse = function(ctx, width, depth, angle, fillColor, strokeColor) {
@@ -26,7 +40,7 @@ pythagoras.main = function() {
 		if (depth <= 0) {
 			return;
 		}
-				
+						
 		ctx.save();
 		ctx.translate(width, 0);
 		ctx.rotate(angle);
@@ -41,6 +55,17 @@ pythagoras.main = function() {
 		ctx.restore();
 		
 				
+	}
+	var num = 0;
+	var duration = 1000;
+	var animate = function() {
+		if (num < 14) {
+			recurse(ctx, width, num, angle, fillColor, strokeColor);
+			setTimeout(function() { window.requestAnimFrame(animate); }, duration);
+			num++;
+			if (num > 9)
+				duration = duration*0.5;
+		}
 	}
 	
 	var rad = function(deg) {
