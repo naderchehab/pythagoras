@@ -5,4 +5,4 @@ Javascript rendering of the <a href="http://en.wikipedia.org/wiki/Pythagoras_tre
 
 
 ### Demo
-* http://pythagoras.clanteam.com/
+* http://pythagoras.herokuapp.com/
